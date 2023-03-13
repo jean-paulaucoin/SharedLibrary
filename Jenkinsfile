@@ -19,7 +19,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-        echo 'congrats, you made it through sonar. goodbye!'
+        echo 'congrats, you made it through sonar. goodbye!!'
       }
     }
   }
