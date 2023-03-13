@@ -16,7 +16,7 @@ pipeline {
         ]
     ]
 )
-                    echo "Creating repository ${userInput.repoName}"
+                    echo "Creating repository ${userInput}"
                     // add code to create the repository
                 }
             }
