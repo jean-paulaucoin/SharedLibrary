@@ -29,7 +29,7 @@ pipeline {
                         sh """
                             git config --global user.email "aucoinjeanpaul@gmail.com"
                             git config --global user.name "Jean-Paul Aucoin"
-                            git clone https://github.com/<jean-paulaucoin>/${repoName}.git
+                            git clone https://github.com/<jean-paulaucoin/SharedLibrary/>/${repoName}.git
                             cd ${repoName}
                             git checkout -b add-file
                             cp ../${repoName}.txt .
