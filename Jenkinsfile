@@ -3,11 +3,13 @@ pipeline {
 
     stages {
         stage('Input') {
+            steps{
             input {
                 message 'Enter the name of the GitHub repository:'
                 parameters {
                     string(name: 'REPO_NAME', defaultValue: '', description: '')
                 }
+            }
             }
         }
 
