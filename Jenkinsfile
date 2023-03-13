@@ -15,7 +15,7 @@ pipeline {
           )
         ]
       )
-      sh("touch ${userInput.fileName}")
+      sh("touch ${userInput}")
       sh("echo 'New file created!'")
     }
   }
