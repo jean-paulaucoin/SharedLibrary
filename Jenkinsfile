@@ -1,29 +1,28 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('User Input') {
-  steps {
-    script {
-      def userInput = input(
-        message: 'Enter the name of the file to create:',
-        parameters: [
-          string(
-            name: 'fileName',
-            defaultValue: 'newfile.txt',
-            description: 'The name of the new file'
-          )
-        ]
-      )
-      sh("touch ${userInput}")
-      sh("echo 'New file created!'")
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn clean package'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+      
+    stage('Deploy') {
+//       environment {
+//         PROD_HOST = 'prod.example.com'
+//         PROD_USER = credentials('prod-ssh-user')
+//         PROD_KEY = credentials('prod-ssh-key')
+//       }
+      steps {
+        echo 'made it this far. DEPLOYING';
+      }
     }
   }
-}
-        stage('Build') {
-            steps {
-                sh 'echo "Building the application"'
-            }
-        }
-    }
 }
