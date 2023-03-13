@@ -25,7 +25,7 @@ pipeline {
                 script {
                     def repoName = env.CHANGE_ID ?: 'my-repo' // use default value if running outside of a pull request
                     sh "touch ${repoName}.txt"
-                    withCredentials([usernamePassword(credentialsId: 'github-auth', usernameVariable: 'jean-paulaucoin', passwordVariable: 'Sam$ung96123!')]) {
+                    withCredentials([usernamePassword(credentialsId: 'jeanpaulaucoin', usernameVariable: 'jeanpaulaucoin', passwordVariable: 'Sam$ung96123!')]) {
                         sh """
                             git config --global user.email "aucoinjeanpaul@gmail.com"
                             git config --global user.name "Jean-Paul Aucoin"
