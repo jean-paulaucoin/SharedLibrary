@@ -14,10 +14,12 @@ pipeline {
         }
       
         stage('Test') {
-            steps {
-                sh 'ls | grep -v -E "(jenkinsfile|.java|.xml|.png)$" && exit 1 || echo "Files are valid, continue."'
-            }
-        }
+  steps {
+    sh 'find . -type f ! -name "Jenkinsfile" ! -name "*.java" ! -name "*.xml" ! -name "*.png" -print0 | xargs -0 echo "Unexpected file types found: "'
+    sh 'find . -type f ! -name "Jenkinsfile" ! -name "*.java" ! -name "*.xml" ! -name "*.png" | grep . && exit 1 || true'
+  }
+}
+
       
         stage('Pre-Prod') {
             steps {
