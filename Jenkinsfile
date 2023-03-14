@@ -45,7 +45,7 @@ stages {
                     }
                 }
                 if (!invalidFiles.isEmpty()) {
-                    error "Invalid files found: ${invalidFiles.join(', ')}"
+                    error "Found the following files that are prohibited per the app type standards: ${invalidFiles.join(', ')}"
                 }
             }
         }
