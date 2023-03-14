@@ -15,11 +15,11 @@ pipeline {
       
         stage('Pre-Prod') {
             steps {
-                echo 'hello pre-prod. you will have to pass code quality percentage to continue'
+                echo 'Here is where we can plug in SonarQube checks before the Prod Artifacts are created'
             }
         }
       
-        stage('Generate Artifact') {
+        stage('Create Prod Artifacts') {
             steps {
                 sh 'cp target/*.jar .'
             }
@@ -32,7 +32,7 @@ pipeline {
       
         stage('Deploy') {
             steps {
-                echo 'congrats, you made it through sonar. goodbye!!'
+                echo 'App Deploying...'
             }
         }
     }
