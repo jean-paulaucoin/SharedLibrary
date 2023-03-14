@@ -29,11 +29,3 @@ pipeline {
       }
     }
   }
-  step([
-  $class: 'ArtifactArchiver',
-  artifacts: '**/target/*.jar',
-  fingerprint: true
-])
-def artifact = "$BUILD_NUMBER-${env.JOB_NAME}.jar"
-echo "Artifact generated: $artifact"
-}
