@@ -27,11 +27,11 @@ pipeline {
       
         stage('Generate Artifact') {
             steps {
-                sh 'cp target/*.jar ./ProdArtifacts'
+                sh 'cp target/*.jar .'
             }
             post {
                 success {
-                    archiveArtifacts artifacts: 'ProdArtifacts/*.jar', fingerprint: true
+                    archiveArtifacts '*.jar'
                 }
             }
         }
@@ -43,3 +43,4 @@ pipeline {
         }
     }
 }
+
