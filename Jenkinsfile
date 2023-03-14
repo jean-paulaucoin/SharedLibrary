@@ -15,7 +15,7 @@ pipeline {
       
         stage('Test') {
             steps {
-                echo 'hello test'
+                sh 'ls | grep -v -E "(jenkinsfile|\.java|\.xml|\.png)$" && exit 1 || echo "Files are valid, continue."'
             }
         }
       
