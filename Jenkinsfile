@@ -12,12 +12,6 @@ stages {
             sh 'mvn clean package'
         }
     }
-  
-    stage('Pre-Prod') {
-        steps {
-            echo 'Here is where we can plug in SonarQube checks before the Prod Artifacts are created'
-        }
-    }
     
     stage('Test') {
         steps {
@@ -40,6 +34,11 @@ stages {
         }
     }
     
+    stage('Pre-Prod') {
+        steps {
+            echo 'Here is where we can plug in SonarQube checks before the Prod Artifacts are created'
+        }
+    }
       
     stage('Create Prod Artifacts') {
         steps {
@@ -55,7 +54,7 @@ stages {
     stage('Deploy') {
         steps {
             echo 'App Deploying...'
+            }
         }
     }
-}
 }
