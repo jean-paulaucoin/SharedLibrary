@@ -25,9 +25,9 @@ pipeline {
             }
         }
       
-        stage('Generate Artifact') {
+        stage('Create Prod Ready Artifact') {
             steps {
-                sh 'cp target/*.jar .'
+                sh 'cp ProdArtifacts/*.jar .'
             }
             post {
                 success {
