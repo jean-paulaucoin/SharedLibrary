@@ -18,17 +18,6 @@ stages {
             echo 'Here is where we can plug in SonarQube checks before the Prod Artifacts are created'
         }
     }
-  
-    stage('Create Prod Artifacts') {
-        steps {
-            sh 'cp target/*.jar .'
-        }
-        post {
-            success {
-                archiveArtifacts '*.jar'
-            }
-        }
-    }
     
     stage('Test') {
         steps {
@@ -47,6 +36,18 @@ stages {
                 if (!invalidFiles.isEmpty()) {
                     error "Found the following files that are prohibited per the app type standards: ${invalidFiles.join(', ')}"
                 }
+            }
+        }
+    }
+    
+      
+    stage('Create Prod Artifacts') {
+        steps {
+            sh 'cp target/*.jar .'
+        }
+        post {
+            success {
+                archiveArtifacts '*.jar'
             }
         }
     }
