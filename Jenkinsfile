@@ -18,7 +18,8 @@ pipeline {
                 script {
                     def pattern = "^(?!\\.\\/).*\\.(java|png|xml|jar)\$"
                     def files = findFiles(glob: '**/*')
-    .findAll { !it.file().isDirectory() && !excludedFiles.contains(it) }
+    .findAll { !it.getPath().isDirectory() && !excludedFiles.contains(it) }
+
     .findAll { !it.file().isFile() || !it.name.matches(pattern) }
 
 
