@@ -10,7 +10,6 @@ pipeline {
             steps {
                 git branch: 'master', url: 'https://github.com/jean-paulaucoin/SharedLibrary.git'
                 sh 'mvn clean package'
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     stage('Test') {
