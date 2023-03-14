@@ -51,7 +51,7 @@ stages {
         }
     }
   
-    stage('Deploy') {
+    stage('Deploy to Prod') {
         steps {
             echo 'App Deploying...'
             }
