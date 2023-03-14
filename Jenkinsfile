@@ -12,14 +12,25 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-      
+        
         stage('Test') {
   steps {
-    sh 'find . -type f ! -name "Jenkinsfile" ! -name "*.java" ! -name "*.xml" ! -name "*.png" -print0 | xargs -0 echo "Unexpected file types found: "'
-    sh 'find . -type f ! -name "Jenkinsfile" ! -name "*.java" ! -name "*.xml" ! -name "*.png" | grep . && exit 1 || true'
+    script {
+      def pattern = "^(?!Jenkinsfile$).*\\.(java|png|xml)\$"
+      def excludedFiles = findFiles(glob: 'Jenkinsfile')
+
+      def files = findFiles(glob: '**/*')
+        .findAll { it.isFile() && !excludedFiles.contains(it) }
+        .findAll { !it.name.matches(pattern) }
+
+      if (files) {
+        error "Found files that do not fit the required file types: ${files*.name.join(', ')}"
+      } else {
+        echo "All files fit the required file types."
+      }
+    }
   }
 }
-
       
         stage('Pre-Prod') {
             steps {
