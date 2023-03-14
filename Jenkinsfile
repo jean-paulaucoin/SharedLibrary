@@ -10,6 +10,7 @@ pipeline {
             steps {
                 git branch: 'master', url: 'https://github.com/jean-paulaucoin/SharedLibrary.git'
                 sh 'mvn clean package'
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     stage('Test') {
@@ -26,6 +27,12 @@ pipeline {
       steps {
         echo 'congrats, you made it through sonar. goodbye!!'
       }
+    }
+  }
+  post {
+    success {
+      def artifact = archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+      echo "The artifact ${artifact.fileName} is ready for deployment"
     }
   }
 }
