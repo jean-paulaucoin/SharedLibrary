@@ -16,7 +16,7 @@ stages {
     stage('Test') {
         steps {
             script {
-                def fileTypes = ["*.java", "*.xml", "*.png", "Jenkinsfile", "*.txt"]
+                def fileTypes = ["*.java", "*.xml", "*.png", "Jenkinsfile"]
                 def changedFiles = sh(
                     script: "git diff --name-only HEAD^ HEAD",
                     returnStdout: true
