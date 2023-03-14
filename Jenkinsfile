@@ -29,10 +29,11 @@ pipeline {
       }
     }
   }
-  post {
-    success {
-      def artifact = archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-      echo "The artifact ${artifact.fileName} is ready for deployment"
-    }
-  }
+  step([
+  $class: 'ArtifactArchiver',
+  artifacts: '**/target/*.jar',
+  fingerprint: true
+])
+def artifact = "$BUILD_NUMBER-${env.JOB_NAME}.jar"
+echo "Artifact generated: $artifact"
 }
