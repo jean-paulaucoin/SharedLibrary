@@ -18,8 +18,9 @@ pipeline {
                 script {
                     def pattern = "^(?!\\.\\/).*\\.(java|png|xml|jar)\$"
                     def files = findFiles(glob: '**/*')
-                        .findAll { it.isFile() }
-                        .findAll { !it.name.matches(pattern) }
+    .findAll { !it.file().isDirectory() && !excludedFiles.contains(it) }
+    .findAll { !it.file().isFile() || !it.name.matches(pattern) }
+
 
                     if (files) {
                         error "Found files that do not fit the required file types: ${files*.name.join(', ')}"
