@@ -16,7 +16,7 @@ pipeline {
         stage('Test') {
   steps {
     script {
-      def pattern = "^(?!Jenkinsfile$).*\\.(java|png|xml)\${variable}"
+      def pattern = "^(?!Jenkinsfile$).*\\.(java|png|xml)\$"
       def excludedFiles = findFiles(glob: 'Jenkinsfile')
 
       def files = findFiles(glob: '**/*')
@@ -31,6 +31,7 @@ pipeline {
     }
   }
 }
+
       
         stage('Pre-Prod') {
             steps {
