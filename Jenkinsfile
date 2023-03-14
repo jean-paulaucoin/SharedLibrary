@@ -25,13 +25,13 @@ pipeline {
             }
         }
       
-        stage('Create Prod Ready Artifact') {
+        stage('Generate Artifact') {
             steps {
-                sh 'cp ProdArtifacts/*.jar .'
+                sh 'cp target/*.jar ./ProdArtifacts'
             }
             post {
                 success {
-                    archiveArtifacts '*.jar'
+                    archiveArtifacts artifacts: 'ProdArtifacts/*.jar', fingerprint: true
                 }
             }
         }
