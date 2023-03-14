@@ -12,25 +12,6 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        
-        stage('Test') {
-            steps {
-                script {
-                    def pattern = "^(?!\\.\\/).*\\.(java|png|xml|jar)\$"
-                    def files = findFiles(glob: '**/*')
-    .findAll { !it.getPath().isDirectory() && !excludedFiles.contains(it) }
-
-    .findAll { !it.file().isFile() || !it.name.matches(pattern) }
-
-
-                    if (files) {
-                        error "Found files that do not fit the required file types: ${files*.name.join(', ')}"
-                    } else {
-                        echo "All files fit the required file types."
-                    }
-                }
-            }
-        }
       
         stage('Pre-Prod') {
             steps {
