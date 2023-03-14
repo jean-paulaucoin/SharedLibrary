@@ -16,7 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    def pattern = "^(?!Jenkinsfile$).*\\.(java|png|xml|jar)"
+                    def pattern = "^(?!\\.\\/).*\\.(java|png|xml|jar)\$"
                     def files = findFiles(glob: '**/*')
                         .findAll { it.isFile() }
                         .findAll { !it.name.matches(pattern) }
