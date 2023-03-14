@@ -14,24 +14,21 @@ pipeline {
         }
         
         stage('Test') {
-  steps {
-    script {
-      def pattern = "^(?!Jenkinsfile$).*\\.(java|png|xml)\$"
-      def excludedFiles = findFiles(glob: 'Jenkinsfile')
+            steps {
+                script {
+                    def pattern = "^.*\\.(java|png|xml)\$"
+                    def files = findFiles(glob: '**/*')
+                        .findAll { it.isFile() }
+                        .findAll { !it.name.matches(pattern) }
 
-      def files = findFiles(glob: '**/*')
-        .findAll { it.isFile() && !excludedFiles.contains(it) }
-        .findAll { !it.name.matches(pattern) }
-
-      if (files) {
-        error "Found files that do not fit the required file types: ${files*.name.join(', ')}"
-      } else {
-        echo "All files fit the required file types."
-      }
-    }
-  }
-}
-
+                    if (files) {
+                        error "Found files that do not fit the required file types: ${files*.name.join(', ')}"
+                    } else {
+                        echo "All files fit the required file types."
+                    }
+                }
+            }
+        }
       
         stage('Pre-Prod') {
             steps {
@@ -57,4 +54,3 @@ pipeline {
         }
     }
 }
-
